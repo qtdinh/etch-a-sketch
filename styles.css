@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+.grid-container {
+    display: inline-grid;
+    grid-template-columns: repeat(16, 1fr);
+    margin: auto;
+}
+
+.grid-container>div {
+    border: 1px solid black;
+    height: 25px;
+    width: 25px;
+}
+
+/*
+.grid-container>div:hover {
+    background-color: red;
+}
+*/
