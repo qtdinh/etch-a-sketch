@@ -11,18 +11,28 @@ function createGrid(numDivs) {
     }
 }
 
-function createNewGrid() {
-    let newSize = prompt("");
-}
-
 createGrid(SIZE);
 
+function createNewGrid() {
+    let squares = prompt("Number of squares per side: ");
+
+    if(squares > 100) {
+        squares = 100;
+    }
+
+    container.style.gridTemplateColumns = `repeat(${squares}, 1fr)`;
+
+    let newSize = squares * squares + 1;
+    createGrid(newSize);
+}
 
 container.addEventListener("mouseover", event => {
     event.target.style.backgroundColor = "purple";
     console.log("mouse in");
 });
 
-
+newGrid.addEventListener('click', function() {
+    createNewGrid();
+});
 
 
