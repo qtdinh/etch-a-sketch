@@ -1,8 +1,8 @@
 const container = document.querySelector('.grid-container');
 
-const etch = document.querySelector('.etch');
+const newGrid = document.querySelector('.new-grid');
 
-const SIZE = 256; //16 * 16 = 256
+const SIZE = 257; //16 * 16 = 256 + 1
 
 function createGrid(numDivs) {
     for (let i = 1; i < numDivs; i++) { 
@@ -11,13 +11,18 @@ function createGrid(numDivs) {
     }
 }
 
+function createNewGrid() {
+    let newSize = prompt("");
+}
+
 createGrid(SIZE);
 
-/*
-etch.addEventListener("mouseout", event => {
-    console.log("Mouse in");
-    event.target.style.color = "purple";
 
+container.addEventListener("mouseover", event => {
+    event.target.style.backgroundColor = "purple";
+    console.log("mouse in");
 });
-*/
+
+
+
 
