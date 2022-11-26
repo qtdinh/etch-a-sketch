@@ -1,60 +1,68 @@
 const container = document.querySelector('.grid-container');
 const newGrid = document.querySelector('.new-grid');
 
-const cell = container.children;
+const initialSquares = 16; //16 * 16 = 256
 
-const SIZE = 16; //16 * 16 = 256
+function createBox() {
+        const box = document.createElement('div');
+        box.className = 'box';
+        container.appendChild(box);
+        box.addEventListener("mouseover", event => {
+            event.target.style.backgroundColor = "purple";
+        });
+}
 
-function createGrid(numDivs) {
-    for (let i = 0; i < numDivs * numDivs; i++) { 
-        const div = document.createElement('div');
-        container.appendChild(div);
+function createStartingGrid() {
+    for(let i = 0; i < initialSquares * initialSquares; i++) {
+        createBox();
     }
 }
 
-function clear(elements) {
-    elements.style.backgroundColor = "transparent";
+createStartingGrid();
+
+function clearGrid () {
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
 }
 
-
-createGrid(SIZE);
-
 function createNewGrid() {
-    let squares = prompt("Number of squares per side: ");
+    let input = prompt("Number of squares per side: ");
 
-    let height = container.offsetHeight;
-
-    if(squares > 100) {
-        squares = 100;
-    } else while (squares < 1) {
+    const maxWidth = container.offsetWidth;
+    
+    if(input > 100) {
+        input = 100;
+    } else while (input < 1) {
         alert("Cannot be less than 1!");
-        squares = prompt("Number of squares per side: ")
+        input = prompt("Number of squares per side: ")
     }
 
+    let squares = parseInt(input);
+
+    let boxSize = (maxWidth / squares) + 'px';
+
+    let boxQuantity = squares * squares;
+    
     container.style.gridTemplateColumns = `repeat(${squares}, 1fr)`;
     container.style.gridTemplateRows = `repeat(${squares}, 1fr)`;
 
-    let squareSize = Math.round(height/squares);
-
-    for(let i = 0; i < cell.length; i++)
-    {
-        cell[i].style.height = `${squareSize}px`;
-        cell[i].style.width = `${squareSize}px`;
+    for(let i = 0; i < boxQuantity; i++) {
+        createBox();
     }
 
-    createGrid(squares);
+    clearGrid();
+
+    let boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => {
+        box.style.width = `${boxSize}`;
+        box.style.height = `${boxSize}`;
+    });
 
 }
 
-container.addEventListener("mouseover", event => {
-    event.target.style.backgroundColor = "purple";
-});
 
 newGrid.addEventListener('click', function() {
-    container.querySelectorAll('div').forEach(clear);
     createNewGrid();
 });
 
