@@ -44,14 +44,14 @@ function createNewGrid() {
 
     let boxQuantity = squares * squares;
     
+    clearGrid();
+
     container.style.gridTemplateColumns = `repeat(${squares}, 1fr)`;
     container.style.gridTemplateRows = `repeat(${squares}, 1fr)`;
 
     for(let i = 0; i < boxQuantity; i++) {
         createBox();
     }
-
-    clearGrid();
 
     let boxes = document.querySelectorAll('.box');
     boxes.forEach(box => {
